@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 $nome = $_POST['nome'];
 $cognome = $_POST['cognome'];
 $email = $_POST['email'];

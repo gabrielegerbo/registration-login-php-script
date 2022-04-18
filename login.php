@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 if($_GET['logout'] == "si" || $_GET['reg'] == "ok") {
 setcookie("univoco", "");
 } else if($_COOKIE['univoco'] != "") {

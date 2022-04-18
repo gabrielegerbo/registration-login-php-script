@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 $univoco = $_COOKIE['univoco'];
 
 if($univoco == "" || preg_match("([<>&(),%'?+])", $univoco) || preg_match('/"/', $univoco)){
@@ -14,12 +16,12 @@ mysqli_set_charset($mysqli,"utf8");
 $query="SELECT id,nome,cognome,email FROM $tabellaUtenti WHERE univoco = '$univoco'";
 $result = $mysqli->query($query) or die( "Unable to query");
 $num = mysqli_num_rows($result);
-$logdb = mysqli_fetch_row($result);
+$row = mysqli_fetch_array($result);
+$id = $row['id'];
+$nome = $row['nome'];
+$cognome = $row['cognome'];
+$email = $row['email'];
 $mysqli->close();
-$id = $logdb['0'];
-$nome = $logdb['1'];
-$cognome = $logdb['2'];
-$email = $logdb['3'];
 
 if ($num < 1) {
 header("Location: login.php?logout=si");
@@ -37,8 +39,8 @@ header("Location: login.php?logout=si");
 
 <h3 style="text-align:center;">Pagina index</h3>
 
-<p></p>Benvenuto <? echo $nome." ".$cognome; ?></p>
-<p></p>La tua mail è <? echo $email; ?></p>
+<p></p>Benvenuto <?php echo $nome." ".$cognome; ?></p>
+<p></p>La tua mail è <?php echo $email; ?></p>
 <p></p>Il tuo ID utente è <?php echo $id; ?></p>
 <p><a href="login.php?logout=si">Logout</a></p>
 
